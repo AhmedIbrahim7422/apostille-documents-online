@@ -1,0 +1,132 @@
+:root{
+    --main-color: #005481;
+    --main-color-1: #9facbd;
+    --main-color-2: #7a3a57;
+}
+
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.container{
+    min-height: calc(100vh - 130px);
+}
+.btn-order{
+    background-color: var(--main-color-2);
+    color: #fff;
+    display: block;
+    margin: 40px auto;
+    min-width: fit-content;
+    max-width: 250px;
+    font-weight: 600;
+    transition: 0.5s;
+}
+.btn-order:hover{
+    background-color: var(--main-color);
+    color: #fff;
+}
+.coverArea{
+    background-image: url("../img/cover.jpg");
+    background-size: cover;
+    height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+}
+.coverArea h1{
+    text-transform: uppercase;
+}
+
+.coverArea .box{
+    max-width: 400px;
+    margin: auto;
+    line-height: 2;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 20px;
+}
+.coverArea .box .btn{
+    color: var(--main-color-2);
+    font-weight: 500;
+    font-size: 18px;
+    transition: 1s;
+}
+.coverArea .box .btn:hover{
+    background-color: var(--main-color-2);
+    color: var(--main-color-1);
+}
+
+h2{
+    color: var(--main-color-2);
+}
+.spacial-text{
+    color: var(--main-color);
+}
+section.steps-section{
+    background-color: #eee;
+    padding: 40px;
+    padding-bottom: 20px;
+}
+.step-box{
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 1px 1px 37px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    font-size: 20px;
+}
+.icon{
+    font-size: 90px;
+    color: var(--main-color-2);
+}
+
+.step-num{
+    font-size: 30px;
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+.copy-section p{
+    font-weight: 500;
+    color: var(--main-color);
+    text-align: center;
+}
+.process-section{
+    background-image: url(./../img/process-bg.jpg);
+    color: #fff;
+    background-position: left;
+}
+.process-section .main-process-content{
+    background-color: rgb(11 32 58 / 90%);
+    padding: 20px;
+}
+.process-section .main-process-content h2{
+    color: #fff;
+}
+.process-section .main-process-content img{
+    border-radius: 20px;
+    max-width: 100%;
+}
+.process-section .main-process-content ul li{
+    list-style: none;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 2.5;
+
+}
+.process-section .main-process-content ul li i{
+    font-size: 30px;
+    margin-right: 10px;
+    color: var(--main-color-1);
+}
+footer{
+    background-color: var(--main-color);
+    color: #fff;
+    font-weight: 500;
+}
+footer p{
+    margin: 0;
+    padding: 10px;
+}

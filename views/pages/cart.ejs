@@ -1,0 +1,47 @@
+<%- include('../components/head.ejs') %>
+
+<%- include('../components/nav.ejs') %>
+<link rel="stylesheet" href="css/cart.css">
+
+<div class="container">
+    <h1>Your Cart</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-muted">
+                Review your uploaded documents and confirm your order.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Uploaded Documents Section -->
+        <div class="col-md-8">
+            <h3>Uploaded Documents</h3>
+            <ul class="list-group mb-3">
+                <% for( let index = 0; index < files.length; index++ ) { %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><span class="text-uppercase"><%= documents[index]  %></span> - <%= files[index] %></span>
+                        <span class="badge bg-primary rounded-pill">Apostille Required</span>
+                    </li>                
+                <% } %>
+                
+                <!-- More items will dynamically appear based on user uploads -->
+            </ul>
+            <!-- <p class="text-muted">
+                Need to make changes? <a href="/" class="text-decoration-none" style="color: var(--main-color);">Go back to upload more documents.</a>
+            </p> -->
+        </div>
+
+        <!-- Summary Section -->
+        <div class="col-md-4">
+            <h3>Order Summary</h3>
+            <div class="summary-box p-3 border rounded mb-3">
+                <p><strong>Total Documents:</strong> <%= count %></p>
+                <p><strong>Destination Country:</strong> <%= country %></p>
+                <p><strong>Total Cost:</strong> $<%= count * 120 %></p>
+            </div>
+            <a href="/shipping" class="btn btn-order w-100 mb-2">Proceed to Checkout</a>
+            <!-- <a href="/" class="btn btn-light w-100">Modify Order</a> -->
+        </div>
+    </div>
+</div>
+<%- include('../components/footer.ejs') %>

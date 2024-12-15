@@ -1,0 +1,61 @@
+/* Custom styles for the Shipping Method page */
+.container {
+    margin-top: 40px;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+h1 {
+    color: var(--main-color);
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.form-check-label {
+    font-size: 16px;
+    color: #000;
+    font-weight: 500;
+}
+
+#airwayBillUpload, #shippingOptions, #shippingDetails {
+    padding-left: 20px;
+    border-left: 3px solid var(--main-color);
+}
+
+#shippingDetails label {
+    font-weight: 500;
+    color: var(--main-color-2);
+}
+input[type="radio"]{
+    border-color: #000;
+}
+#shippingDetails input {
+    border: 1px solid var(--main-color-1);
+}
+
+.btn-order {
+    background-color: var(--main-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-order:hover {
+    background-color: var(--main-color-2);
+}
+
+.form-check-input:checked {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.d-none {
+    display: none !important;
+}

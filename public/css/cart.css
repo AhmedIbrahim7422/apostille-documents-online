@@ -1,0 +1,25 @@
+/* Cart Page Styling */
+h1 {
+    color: var(--main-color);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.summary-box {
+    background-color: #f8f9fa;
+    border: 2px solid var(--main-color-1);
+    border-radius: 8px;
+}
+
+.list-group-item {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.list-group-item .badge {
+    font-size: 0.85rem;
+    background-color: var(--main-color);
+}

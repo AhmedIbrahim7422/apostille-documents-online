@@ -1,0 +1,116 @@
+<%- include('../components/head.ejs') %>
+
+<%- include('../components/nav.ejs') %>
+<link rel="stylesheet" href="css/shipping.css">
+
+<div class="container">
+    <h1>Choose Your Shipping Method</h1>
+    <form action="/summary" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <!-- Shipping Option 1 -->
+            <div class="col-md-12 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="shippingMethod" id="uploadAirwayBill" value="uploadAirwayBill" required>
+                    <label class="form-check-label" for="uploadAirwayBill">
+                        I am going to upload now a return FedEx or UPS airway bill using my company account.
+                    </label>
+                </div>
+                <div id="airwayBillUpload" class="mt-3 d-none">
+                    <label for="airwayBillFile" class="form-label">Upload Airway Bill</label>
+                    <input type="file" name="airwayBillFile" id="airwayBillFile" class="form-control">
+                </div>
+            </div>
+
+            <!-- Shipping Option 2 -->
+            <div class="col-md-12 mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="shippingMethod" id="getShippingService" value="getShippingService" required>
+                    <label class="form-check-label" for="getShippingService">
+                        I would like to get shipping service to return my documents.
+                    </label>
+                </div>
+
+                <!-- Sub-options for Shipping Service -->
+                <div id="shippingOptions" class="mt-3 d-none">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="shippingOption" id="twoDayDelivery" value="twoDayDelivery" required>
+                        <label class="form-check-label" for="twoDayDelivery">
+                            2 days delivery (by the end of the day) for $20
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="shippingOption" id="priorityDelivery" value="priorityDelivery" required>
+                        <label class="form-check-label" for="priorityDelivery">
+                            A Priority next day delivery (by 10:30 AM) for $35
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="shippingOption" id="internationalFedEx" value="internationalFedEx" required>
+                        <label class="form-check-label" for="internationalFedEx">
+                            An International FedEx airway bill for estimated fee of $65 (Prepaid is required)
+                        </label>
+                    </div>
+
+                    <!-- Additional Shipping Information -->
+                    <div id="shippingDetails" class="mt-4 row">
+                        <div class="mb-3 col-md-6">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="company" class="form-label">Company Name (optional)</label>
+                            <input type="text" name="company" id="company" class="form-control">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="streetAddress" class="form-label">Street Address</label>
+                            <input type="text" name="streetAddress" id="streetAddress" class="form-control" required>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" name="city" id="city" class="form-control" required>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" name="country" id="country" class="form-control" required>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="zipcode" class="form-label">Zipcode</label>
+                            <input type="text" name="zipcode" id="zipcode" class="form-control" required>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" name="phone" id="phone" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn-order mt-3">Proceed to Summary</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript to toggle input fields based on user selection
+    document.addEventListener('DOMContentLoaded', function () {
+        const uploadAirwayBill = document.getElementById('uploadAirwayBill');
+        const airwayBillUpload = document.getElementById('airwayBillUpload');
+        const getShippingService = document.getElementById('getShippingService');
+        const shippingOptions = document.getElementById('shippingOptions');
+        const shippingDetails = document.getElementById('shippingDetails');
+
+        uploadAirwayBill.addEventListener('change', () => {
+            airwayBillUpload.classList.remove('d-none');
+            shippingOptions.classList.add('d-none');
+            shippingDetails.classList.add('d-none');
+        });
+
+        getShippingService.addEventListener('change', () => {
+            shippingOptions.classList.remove('d-none');
+            airwayBillUpload.classList.add('d-none');
+            shippingDetails.classList.remove('d-none');
+        });
+    });
+</script>
+<%- include('../components/footer.ejs') %>
