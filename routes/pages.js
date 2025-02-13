@@ -19,6 +19,6 @@ router.get('/payment', pages.getPayment);
 
 router.post('/apostille-order', pages.postApostilleOrder);
 
-router.get('/getPayment', auth.getHash);
+router.get('/getpayment', auth.getHash);
 
 module.exports = router
