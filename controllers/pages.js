@@ -38,6 +38,15 @@ exports.getShipping = (req, res, next) =>{
     }
     res.redirect('/')
 }
+exports.getPayment = (req, res, next) =>{    
+    // if (req.session.order) {    
+        return res.render('pages/payment', {
+            PageTitle: 'payment',
+            path: 'payment',            
+        });        
+    // }
+    // res.redirect('/')
+}
 exports.postApostilleOrder = (req, res, next) =>{
     let {email} = req.body
     let {name} = req.body

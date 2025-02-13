@@ -7,13 +7,15 @@ const mongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
 const multer = require('multer');
-
+const https = require('https')
 const app = express();
+const cors = require('cors');
+const fs = require("fs")
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 
-
+app.use(cors());
 app.use(session({
     secret: 'your_secret_key',
     resave: false,
@@ -22,6 +24,9 @@ app.use(session({
   }));
 
 const csrfProtection = csrf()
+
+const privateKey = fs.readFileSync('key.pem')
+const certificate = fs.readFileSync('cert.pem')
 
 app.set('view engine', 'ejs');
 const pagesRoutes = require('./routes/pages')
@@ -46,7 +51,16 @@ app.use((req, res, next) => {
 
 app.use(pagesRoutes)
 
-app.listen(3000, () => {
+
+const sslServer= https.createServer(
+    {
+        key: privateKey,
+        cert: certificate,
+    },app
+    
+) 
+
+sslServer.listen(3000, () => {
 console.log(`Server is running on http://localhost:3000`);
 });
 
