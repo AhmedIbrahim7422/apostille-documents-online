@@ -43,15 +43,10 @@ exports.getShipping = (req, res, next) => {
 }
 exports.getPayment = (req, res, next) => {
     // if (req.session.order) { 
-    const secretKey = 'e3c7e6936a50757fcb4bd66409ac5a9c2b491e806457550b0f';
-    const queryParam = 'Domain=https://apostille.souqalkhaleej.org&ProviderKey=FAWATERAK.21870';
-    const hash = crypto.createHmac('sha256', secretKey)
-        .update(queryParam)
-        .digest('hex')
     return res.render('pages/payment', {
         PageTitle: 'payment',
         path: 'payment',
-        hash: hash
+        hash: "abd68ae996eb3ba09910db050851ab226a7a69de01bce1b249c31a3164f4aa28"
     });
     // }
     // res.redirect('/')
