@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 exports.getIndex = (req, res, next) => {
     res.render('pages/index', {
-        PageTitle: 'Apostille Documents',
+        PageTitle: 'Apostille',
         path: '/',
     });
 }
@@ -42,18 +42,39 @@ exports.getShipping = (req, res, next) => {
     res.redirect('/')
 }
 exports.getPayment = (req, res, next) => {
-    // if (req.session.order) { 
-    return res.render('pages/payment', {
-        PageTitle: 'payment',
-        path: 'payment',
-        hash: "abd68ae996eb3ba09910db050851ab226a7a69de01bce1b249c31a3164f4aa28"
-    });
-    // }
-    // res.redirect('/')
+    const invoiceId = req.params.invoiceId;
+    console.log(4);
+    
+    Order.findById(invoiceId)
+        .then(invoice => {
+            return res.send( invoice);
+        })
+        .catch(err => console.log(err))
 }
+
+exports.getInvoice = (req, res, next) => {
+    const invoiceId = req.params.invoiceId;
+    Order.findById(invoiceId)
+        .then(invoice => {
+            return res.render('pages/invoice', {
+                PageTitle: 'invoice',
+                path: 'invoice',
+                invoice: {
+                    number: invoiceId,
+                    customerName: invoice.name,
+                    customerAddress: invoice.address,
+                    items: invoice.documents,                    
+                }                
+            });
+        })
+        .catch(err => console.log(err))
+}
+
 exports.postApostilleOrder = (req, res, next) => {
     let { email } = req.body
     let { name } = req.body
+    let { address } = req.body
+    let { phone } = req.body
     let { country } = req.body
     let { documents } = req.body
     let files = []
@@ -66,6 +87,8 @@ exports.postApostilleOrder = (req, res, next) => {
     req.session.order = {
         email: email,
         name: name,
+        address: address,
+        phone: phone,
         country: country,
         files: files,
         documents: documents
@@ -86,6 +109,8 @@ exports.postShipping = (req, res, next) => {
         const order = new Order({
             name: req.session.order.name,
             email: req.session.order.email,
+            address: req.session.order.address,
+            phone: req.session.order.phone,
             country: req.session.order.country,
             documents: req.session.order.documents,
             files: req.session.order.files,
@@ -94,7 +119,7 @@ exports.postShipping = (req, res, next) => {
         order.save()
             .then(resalut => {
                 console.log(resalut);
-                res.redirect('/payment')
+                res.redirect('/')
             })
             .catch(err => console.log(err))
     }

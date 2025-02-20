@@ -12,6 +12,14 @@ const orderSchema = new Schema({
         type: String,
         required: true
     },
+    phone: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
     country: String,
     documents: Array,
     files: Array,

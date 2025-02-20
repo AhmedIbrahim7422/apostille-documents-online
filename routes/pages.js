@@ -15,7 +15,9 @@ router.get('/cart', pages.getCart);
 
 router.get('/shipping', pages.getShipping);
 
-router.get('/payment', pages.getPayment);
+router.get('/payment/:invoiceId', pages.getPayment);
+
+router.get('/invoice/:invoiceId', pages.getInvoice);
 
 router.post('/apostille-order', pages.postApostilleOrder);
 
