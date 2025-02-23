@@ -1,103 +1,54 @@
 <%- include('../components/head.ejs') %>
-    <style>
-        .container {
-            min-height: calc(100vh - 130px);
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        h1,
-        h2 {
-            text-align: center;
-            color: var(--main-color-2);
-        }
-
-        .invoice-details {
-            margin-bottom: 20px;
-            color: var(--main-color);
-        }
-
-        .invoice-details p {
-            margin: 5px 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        table th,
-        table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-
-        table th {
-            background-color: var(--main-color-1);
-        }
-
-        .invoice-summary {
-            text-align: right;
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--main-color-2);
-        }
-
-        .invoice-summary p {
-            margin: 5px 0;
-        }
-    </style>
-    <div class="container">
-        <h1>Invoice</h1>
-        <div class="invoice-details">
-            <p><strong>Date:</strong>
-                <%= new Date().toLocaleDateString() %>
-            </p>
-            <p><strong>Invoice Number:</strong>
-                <%= invoice.number %>
-            </p>
-            <p><strong>Customer:</strong>
-                <%= invoice.customerName %>
-            </p>
-            <p><strong>Address:</strong>
-                <%= invoice.customerAddress %>
-            </p>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 20px; box-sizing: border-box; overflow-x: hidden;">
+    <div style=" align-items: center; max-width: 800px; margin: 0 auto; min-height: calc(100vh - 130px);">
+        <h1 style="text-align: center; color: #7a3a57; margin-bottom: 20px;">Invoice</h1>
+        <div style=" justify-content: space-between; width: 100%; color: #005481; margin-bottom: 20px;">
+            <p style="margin: 5px 0;"><strong>Date:</strong> <%= new Date().toLocaleDateString() %></p>
+            <p style="margin: 5px 0;"><strong>Invoice Number:</strong> <%= invoice.number %></p>
+            <p style="margin: 5px 0;"><strong>Customer:</strong> <%= invoice.customerName %></p>
+            <p style="margin: 5px 0;"><strong>Address:</strong> <%= invoice.customerAddress %></p>
+            <p style="margin: 5px 0;"><strong>Total Processing Time:</strong> <%= invoice.items.includes('fda') ? '10 business days' : '2 business days' %></p>
         </div>
 
-        <table>
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0; text-align: left;">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Document</th>
-                    <th>Price</th>
+                <tr style="background-color: #9facbd;">
+                    <th style="border: 1px solid #ddd; padding: 10px;">#</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">Document</th>
+                    <th style="border: 1px solid #ddd; padding: 10px;">Price</th>
                 </tr>
             </thead>
             <tbody>
                 <% invoice.items.forEach(function(item, index) { %>
                     <tr>
-                        <td>
-                            <%= index + 1 %>
-                        </td>
-                        <td>
-                            <%= item %>
-                        </td>                        
-                        <td>$120
-                        </td>                        
+                        <td style="border: 1px solid #ddd; padding: 10px;"><%= index + 1 %></td>
+                        <td style="border: 1px solid #ddd; padding: 10px;"><%= item %></td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">$110</td>
                     </tr>
-                    <% }); %>
+                <% }); %>
+                <% if (!invoice.shipFile) { %>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 10px;" colspan="2">Fedex Airway Bill</td>
+                        
+                        <td style="border: 1px solid #ddd; padding: 10px;">$<%= invoice.shipType %></td>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
 
-        <div class="invoice-summary">
-            
-            <p>Total: $<%= invoice.items.length * 120 %>
-            </p>
+        <div style="width: 100%; text-align: right; font-size: 18px; font-weight: bold; color: #7a3a57;">
+            <p style="margin: 5px 0;">Total: $<%= (invoice.items.length * 110) +  (invoice.shipFile ? 0 : +invoice.shipType)%></p>
         </div>
+        <% invoice.files.forEach(function(file, index) { %>
+            <a href="/docs/<%= file %>" target="_blank" rel="noopener noreferrer">File #<%= index + 1%></a><br>
+        <% }); %>
+        <% if (invoice.shipFile) { %>
+            <a href="/docs/<%= invoice.shipFile %>" target="_blank" rel="noopener noreferrer">Shipping File</a>
+        <% } %>
+            <p class="text-center">
+                For any inquiries, feel free to reach out to us at <a href="mailto:apostille@souqalkhaleej.org">apostille@souqalkhaleej.org</a>
+            </p>
     </div>
-
-    </body>
+</body>
 
     </html>

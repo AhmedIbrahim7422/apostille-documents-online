@@ -1,0 +1,38 @@
+<%- include('../components/head.ejs') %>
+    <%- include('../components/nav.ejs') %>
+        <div class="container">
+            <section class="contact-section" style="padding: 40px 20px;">
+                <% if (emailSend.length > 0) { %>
+                    <div class="alert alert-<%= emailSend == 'Massage Send' ? 'success' : 'danger' %>">
+                        <%= emailSend %>
+                    </div>
+                <% } %>
+                <h2>Contact Us</h2>
+                <p class="spacial-text">We would love to hear from you!</p>
+                <form action="/send-email" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="name" style="display: block; margin-bottom: 5px;">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required
+                            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="email" style="display: block; margin-bottom: 5px;">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required
+                            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="subject" style="display: block; margin-bottom: 5px;">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required
+                            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="message" style="display: block; margin-bottom: 5px;">Message</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Your Message" required
+                            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-order">Send Message</button>
+                </form>
+            </section>
+        </div>
+        <%- include('../components/footer.ejs') %>

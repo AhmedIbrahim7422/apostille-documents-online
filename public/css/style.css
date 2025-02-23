@@ -57,7 +57,7 @@ body{
     color: var(--main-color-1);
 }
 
-h2{
+h2, h3{
     color: var(--main-color-2);
 }
 .spacial-text{
@@ -92,6 +92,10 @@ section.steps-section{
     font-weight: 500;
     color: var(--main-color);
     text-align: center;
+}
+.copy-section ul li{
+    color: var(--main-color);
+
 }
 .process-section{
     background-image: url(./../img/process-bg.jpg);

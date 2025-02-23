@@ -13,9 +13,9 @@ const fs = require("fs")
 
 
 const app = express();
+require('dotenv').config();
 
-const MONGODB_URL = 'mongodb+srv://admin:12345@nodetut.qkduzbv.mongodb.net/Apostille_documents'
-
+const MONGODB_URL = process.env.DATABASE_URL;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
@@ -30,6 +30,7 @@ app.use(session({
 
 const csrfProtection = csrf()
 
+app.use(flash())
 const privateKey = fs.readFileSync('key.pem')
 const certificate = fs.readFileSync('cert.pem')
 

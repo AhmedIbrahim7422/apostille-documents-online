@@ -2,6 +2,58 @@ const Order = require('../models/order');
 const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+const ejs = require('ejs');
+const { promisify } = require('util');
+
+const renderFile = promisify(ejs.renderFile);
+const { MailtrapTransport } = require("mailtrap");
+
+// Create transporter
+const transporter = nodemailer.createTransport(
+    MailtrapTransport({
+      token: process.env.Token,
+    })
+  );
+
+  async function sendEmailWithTemplate(invoice) {
+    try {
+        if (!invoice || !invoice.email) {
+            throw new Error('Invoice data is missing or invalid');
+        }
+
+        // Define the template path
+        const templatePath = path.join(__dirname, '../views/pages/invoice.ejs');
+
+        // Render EJS template
+        const htmlContent = await renderFile(templatePath, {
+            PageTitle: 'Invoice',
+            path: 'invoice',
+            invoice: {
+                number: invoice.id.toString(),
+                customerName: invoice.name,
+                customerAddress: invoice.address,
+                items: invoice.documents,
+                files: invoice.files,
+                shipFile: invoice.shipping.shipFileName ? invoice.shipping.shipFileName : false,
+                shipType: invoice.shipping.shipType
+            }
+        });
+
+        // Send email
+        const info = await transporter.sendMail({
+            from: `"Apstille" <${process.env.MAIL}>`,
+            to: invoice.email,
+            subject: 'Your Invoice',
+            html: htmlContent
+        });
+
+        console.log('Message sent: %s', info.messageId);
+    } catch (error) {
+        console.error('Error sending email:', error);
+    }
+}
+
 
 exports.getIndex = (req, res, next) => {
     res.render('pages/index', {
@@ -52,23 +104,35 @@ exports.getPayment = (req, res, next) => {
         .catch(err => console.log(err))
 }
 
-exports.getInvoice = (req, res, next) => {
-    const invoiceId = req.params.invoiceId;
-    Order.findById(invoiceId)
-        .then(invoice => {
-            return res.render('pages/invoice', {
-                PageTitle: 'invoice',
-                path: 'invoice',
-                invoice: {
-                    number: invoiceId,
-                    customerName: invoice.name,
-                    customerAddress: invoice.address,
-                    items: invoice.documents,                    
-                }                
-            });
-        })
-        .catch(err => console.log(err))
-}
+exports.getInvoice = async (req, res, next) => {
+    try {
+        const invoiceId = req.params.invoiceId;
+        const invoice = await Order.findById(invoiceId);
+
+        if (!invoice) {
+            return res.status(404).send('Invoice not found');
+        }
+
+        await sendEmailWithTemplate(invoice);
+
+        res.render('pages/invoice', {
+            PageTitle: 'Invoice',
+            path: 'invoice',
+            invoice: {
+                number: invoiceId,
+                customerName: invoice.name,
+                customerAddress: invoice.address,
+                items: invoice.documents,
+                files: invoice.files,
+                shipFile: invoice.shipping.shipFileName ? invoice.shipping.shipFileName : false,
+                shipType: invoice.shipping.shipType
+            }
+        });
+    } catch (err) {
+        console.error('Error fetching invoice:', err);
+        res.status(500).send('Internal Server Error');
+    }
+};
 
 exports.postApostilleOrder = (req, res, next) => {
     let { email } = req.body
@@ -99,29 +163,83 @@ exports.postApostilleOrder = (req, res, next) => {
 
 exports.postShipping = (req, res, next) => {
     let { shippingMethod } = req.body
+    console.log(req.body);
+    
     if (shippingMethod == "uploadAirwayBill") {
         let shipfile = req.files[0].filename
         req.session.ship = {
             shipFileName: shipfile,
             shipType: shippingMethod
         }
-
-        const order = new Order({
-            name: req.session.order.name,
-            email: req.session.order.email,
-            address: req.session.order.address,
-            phone: req.session.order.phone,
-            country: req.session.order.country,
-            documents: req.session.order.documents,
-            files: req.session.order.files,
-            shipping: req.session.ship
-        })
-        order.save()
-            .then(resalut => {
-                console.log(resalut);
-                res.redirect('/')
-            })
-            .catch(err => console.log(err))
+        
+    } else {
+        req.session.ship = {
+            shipType: req.body.shippingOption,
+            shipData: {
+                name: req.body.name,
+                company: req.body.company,
+                streetAddress: req.body.streetAddress,
+                city: req.body.city,
+                country: req.body.country,
+                state: req.body.state,
+                zipcode: req.body.zipcode,
+                phone: req.body.phone,
+            }
+        }
+        
     }
+    console.log('sees',req.session.ship);
+    
+    const order = new Order({
+        name: req.session.order.name,
+        email: req.session.order.email,
+        address: req.session.order.address,
+        phone: req.session.order.phone,
+        country: req.session.order.country,
+        documents: req.session.order.documents,
+        files: req.session.order.files,
+        shipping: req.session.ship
+    })
+    order.save()
+        .then(resalut => {
+            console.log(resalut);
+            res.redirect('https://souqalkhaleej.org/payment/?id='+ resalut.id.toString())
+        })
+        .catch(err => console.log(err))
 
+}
+
+
+// static pages
+exports.getcontact = (req, res, next) => {
+    res.render('pages/contact-us', {
+        PageTitle: 'Apostille - Contact Us',
+        emailSend: req.flash('send'),
+        path: '/contact',
+    });
+}
+
+exports.sendEmail = async (req, res, next) => {
+    let {name} = req.body
+    let {email} = req.body
+    let {subject} = req.body
+    let {message} = req.body
+
+    try{
+        const info = await transporter.sendMail({
+            from: `"contact" <${process.env.MAIL}>`,
+            to: 'ahmedibrahim4456@gmail.com',
+            subject: `${subject} ${name} ${email}`,
+            html: message
+        });
+
+        console.log('Message sent: %s', info.messageId);
+        req.flash('send', 'Massage Send')
+        res.redirect('/contact-us')
+    } catch (error) {
+        console.error('Error sending email:', error);
+        req.flash('send', 'Try Again')
+        res.redirect('/contact-us')
+    }
+    
 }

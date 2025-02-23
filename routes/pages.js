@@ -24,5 +24,9 @@ router.post('/apostille-order', pages.postApostilleOrder);
 router.post('/shipping', pages.postShipping);
 
 // router.get('/getpayment', auth.getHash);
+// static pages
+router.get('/contact-us', pages.getcontact);
+router.post('/send-email', pages.sendEmail);
+
 
 module.exports = router

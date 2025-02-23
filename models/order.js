@@ -37,7 +37,8 @@ const orderSchema = new Schema({
             phone: String,
             country: String,
         } 
-    }
+    },
+    endData: String
 })
 
 module.exports = mongoose.model("Order", orderSchema)
