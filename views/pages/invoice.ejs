@@ -40,7 +40,7 @@
             <p style="margin: 5px 0;">Total: $<%= (invoice.items.length * 110) +  (invoice.shipFile ? 0 : +invoice.shipType)%></p>
         </div>
         <% invoice.files.forEach(function(file, index) { %>
-            <a href="https://www.apostille.souqalkhaleej.org/docs/<%= window.location.origin+ file %>" target="_blank" rel="noopener noreferrer">File #<%= index + 1%></a><br>
+            <a href="https://www.apostille.souqalkhaleej.org/docs/<%= file %>" target="_blank" rel="noopener noreferrer">File #<%= index + 1%></a><br>
         <% }); %>
         <% if (invoice.shipFile) { %>
             <a href="https://www.apostille.souqalkhaleej.org/docs/<%= invoice.shipFile %>" target="_blank" rel="noopener noreferrer">Shipping File</a>
