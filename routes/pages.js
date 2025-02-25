@@ -25,6 +25,8 @@ router.post('/shipping', pages.postShipping);
 
 // router.get('/getpayment', auth.getHash);
 // static pages
+router.get('/privacy-policy', pages.getPrivacy);
+router.get('/terms-and-service', pages.getTerms);
 router.get('/contact-us', pages.getcontact);
 router.post('/send-email', pages.sendEmail);
 

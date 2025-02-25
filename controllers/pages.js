@@ -218,6 +218,20 @@ exports.getcontact = (req, res, next) => {
         path: '/contact',
     });
 }
+exports.getTerms = (req, res, next) => {
+    res.render('pages/terms', {
+        PageTitle: 'Apostille - Terms and Service',
+        emailSend: req.flash('send'),
+        path: '/terms=and-service',
+    });
+}
+exports.getPrivacy = (req, res, next) => {
+    res.render('pages/privacy', {
+        PageTitle: 'Apostille - Privacy Policy',
+        emailSend: req.flash('send'),
+        path: '/privacy-policy',
+    });
+}
 
 exports.sendEmail = async (req, res, next) => {
     let {name} = req.body
