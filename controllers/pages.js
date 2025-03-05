@@ -56,12 +56,14 @@ const transporter = nodemailer.createTransport(
 
 
 exports.getIndex = (req, res, next) => {
+    
     res.render('pages/index', {
         PageTitle: 'Apostille',
         path: '/',
     });
 }
 exports.getApostilleOrder = (req, res, next) => {
+    console.log("make order page");
     res.render('pages/apostille-order', {
         PageTitle: 'Apostille Order',
         path: 'order',
