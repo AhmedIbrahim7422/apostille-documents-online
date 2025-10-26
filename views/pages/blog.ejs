@@ -1,0 +1,27 @@
+<%- include('../components/head.ejs') %>
+<%- include('../components/nav.ejs') %>
+
+<section class="blog-hero py-5 text-center">
+    <div class="container">
+        <h1>Apostille Blog</h1>
+        <p class="lead">Helpful articles and resources about apostilles, notarization, and document processing.</p>
+        <div class="row justify-content-center pt-4">
+            <% posts.forEach(function(post){ %>
+                <div class="col-md-4 mb-4">
+                    <a href="<%= post.url %>" class="card-link">
+                        <div class="card blog-card h-100">
+                            <img src="<%= post.img %>" class="card-img-top" alt="<%= post.title %>">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= post.title %></h5>
+                                <p class="card-text"><%= post.desc %></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+
+<%- include('../components/footer.ejs') %>

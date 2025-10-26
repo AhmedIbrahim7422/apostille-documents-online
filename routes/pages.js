@@ -29,6 +29,13 @@ router.get('/privacy-policy', pages.getPrivacy);
 router.get('/terms-and-service', pages.getTerms);
 router.get('/contact-us', pages.getcontact);
 router.post('/send-email', pages.sendEmail);
+router.get('/blogs', pages.getBlog);
+router.get('/fbi-channelers', pages.getFBIChannelers);
+router.get('/fbi-apostille-for-spain-visa-residency', pages.getFbiSpain);
+router.get('/fbi-spain', pages.getFbiSpain);
+router.get('/fbi-spain-article', pages.getFbiSpainArticle);
+router.get('/why-choose-apostille-documents-online', pages.getFbiService);
+router.get('/fbi-apostille-for-portugal', pages.getFbiPortugal);
 
 
 module.exports = router

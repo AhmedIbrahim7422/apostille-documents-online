@@ -60,6 +60,8 @@ exports.getIndex = (req, res, next) => {
     res.render('pages/index', {
         PageTitle: 'Apostille',
         path: '/',
+        metaDescription: 'Fast online apostille services for FBI and other documents. Get expedited apostille with secure upload and tracked shipping.',
+        metaKeywords: 'apostille, FBI apostille, apostille online, document authentication, expedited apostille'
     });
 }
 exports.getApostilleOrder = (req, res, next) => {
@@ -67,6 +69,8 @@ exports.getApostilleOrder = (req, res, next) => {
     res.render('pages/apostille-order', {
         PageTitle: 'Apostille Order',
         path: 'order',
+        metaDescription: 'Place your apostille order online for FBI background checks and other documents. Secure upload and expedited processing.',
+        metaKeywords: 'apostille order, FBI apostille order, place apostille order, apostille online'
     });
 }
 exports.getCart = (req, res, next) => {
@@ -76,6 +80,8 @@ exports.getCart = (req, res, next) => {
         return res.render('pages/cart', {
             PageTitle: 'Cart',
             path: 'cart',
+            metaDescription: 'Review your apostille order, uploaded files, and shipping before checkout.',
+            metaKeywords: 'apostille cart, order review, apostille order',
             country: req.session.order.country,
             count: filesCount,
             files: files,
@@ -91,6 +97,8 @@ exports.getShipping = (req, res, next) => {
         return res.render('pages/shipping', {
             PageTitle: 'Shipping',
             path: 'shipping',
+            metaDescription: 'Choose shipping options and return preferences for your apostille delivery. Multiple FedEx return options available.',
+            metaKeywords: 'apostille shipping, return shipping, FedEx, shipping options'
         });
     }
     res.redirect('/')
@@ -120,6 +128,8 @@ exports.getInvoice = async (req, res, next) => {
         res.render('pages/invoice', {
             PageTitle: 'Invoice',
             path: 'invoice',
+            metaDescription: 'Your apostille invoice and order details.',
+            metaKeywords: 'apostille invoice, order invoice, apostille billing',
             invoice: {
                 number: invoiceId,
                 customerName: invoice.name,
@@ -218,6 +228,8 @@ exports.getcontact = (req, res, next) => {
         PageTitle: 'Apostille - Contact Us',
         emailSend: req.flash('send'),
         path: '/contact',
+        metaDescription: 'Contact ApostilleDocuments.online for support with apostille services, order help, and questions about FBI apostilles.',
+        metaKeywords: 'contact apostille, apostille support, contact FBI apostille'
     });
 }
 exports.getTerms = (req, res, next) => {
@@ -225,6 +237,8 @@ exports.getTerms = (req, res, next) => {
         PageTitle: 'Apostille - Terms and Service',
         emailSend: req.flash('send'),
         path: '/terms=and-service',
+        metaDescription: 'Terms of service for ApostilleDocuments.online. Read our terms and conditions for apostille processing and service use.',
+        metaKeywords: 'terms of service, apostille terms, service agreement'
     });
 }
 exports.getPrivacy = (req, res, next) => {
@@ -232,8 +246,12 @@ exports.getPrivacy = (req, res, next) => {
         PageTitle: 'Apostille - Privacy Policy',
         emailSend: req.flash('send'),
         path: '/privacy-policy',
+        metaDescription: 'Privacy policy for ApostilleDocuments.online describing how we collect, use, and protect your personal data during apostille processing.',
+        metaKeywords: 'privacy policy, data protection, apostille privacy, GDPR'
     });
 }
+
+
 
 exports.sendEmail = async (req, res, next) => {
     let {name} = req.body
@@ -258,4 +276,106 @@ exports.sendEmail = async (req, res, next) => {
         res.redirect('/contact-us')
     }
     
+}
+
+exports.getBlog = (req, res, next) => {
+    const posts = [
+        {
+            url: '/apostille-order',
+            img: '/docs/img/apostilledocument.jpg',
+            title: 'How to Apostille a Document',
+            desc: 'A short, easy-to-follow guide that explains the apostille process and what you need to prepare.'
+        },
+       
+        {
+            url: '/fbi-channelers',
+            img: '/docs/img/cover.jpg',
+            title: 'FBI Approved Channelers',
+            desc: 'Official list of FBI-approved channelers for expedited Identity History Summary checks.'
+        },
+        {
+            url: '/fbi-spain',
+            img: '/docs/img/apostilledocument.jpg',
+            title: 'FBI Apostille for Spain',
+            desc: 'Get your FBI background check apostilled for Spanish visas, residency and more.'
+        },
+        {
+            url: '/fbi-spain-article',
+            img: '/docs/img/cover.jpg',
+            title: 'FBI Background Check Apostille for Spain',
+            desc: 'Don\'t let paperwork delay your move to Spain. Fast apostille service for FBI background checks.'
+        
+        },
+        {
+            url: '/why-choose-apostille-documents-online',
+            img: '/docs/img/apostilledocument.jpg',
+            title: 'Fast FBI Apostille Service: Expedited FBI Background Check Apostille | ApostilleDocuments.online',
+            desc: 'Get your FBI background check apostille fast. ApostilleDocuments.online is an approved channeler for expedited FBI apostille services. Learn our simple process and clear apostille cost.'
+        }
+        ,
+        {
+            url: '/fbi-apostille-for-portugal',
+            img: '/docs/img/cover.jpg',
+            title: 'FBI Apostille for Portugal (D7 & Golden Visa)',
+            desc: 'Get your FBI background check apostilled for Portugal quickly. Expedited processing, transparent pricing & trusted by expats.'
+        }
+    ];
+
+    res.render('pages/blog', {
+        PageTitle: 'Apostille - Blog',
+        path: '/blogs',
+        metaDescription: 'Read our blog for guides about apostilles, FBI background checks, and document authentication. Helpful resources and how-tos.',
+        metaKeywords: 'apostille blog, FBI apostille guide, document authentication, apostille how-to',
+        posts: posts
+    });
+}
+
+// Render page for FBI apostille for Spain
+exports.getFbiSpain = (req, res, next) => {
+    res.render('pages/fbi-spain', {
+        PageTitle: 'Expedited FBI Apostille for Spain',
+        path: '/fbi-apostille-for-spain-visa-residency',
+        metaDescription: 'Get your FBI background check apostilled for use in Spain for visas and residency. Fast and compliant apostille services.',
+        metaKeywords: 'FBI apostille Spain, apostille for Spain, Spain visa apostille'
+    });
+}
+
+// Add FBI channelers static page renderer
+exports.getFBIChannelers = (req, res, next) => {
+    res.render('pages/fbi-channelers', {
+        PageTitle: 'FBI Approved Channelers',
+        path: '/fbi-channelers',
+        metaDescription: 'Official list of FBI-approved channelers to help you obtain Identity History Summary checks quickly and securely.',
+        metaKeywords: 'FBI channelers, approved channeler, FBI background check, channeler list'
+    });
+}
+
+// Render marketing/service page for fast FBI apostille
+exports.getFbiService = (req, res, next) => {
+    res.render('pages/fbi-service', {
+        PageTitle: 'Fast FBI Apostille Service: Expedited FBI Background Check Apostille | ApostilleDocuments.online',
+        path: '/why-choose-apostille-documents-online',
+        metaDescription: 'Get your FBI background check apostille fast. ApostilleDocuments.online is an approved channeler for expedited FBI apostille services. Learn our simple process and clear apostille cost.',
+        metaKeywords: 'fast FBI apostille, expedited FBI apostille, FBI background check apostille, apostille service'
+    });
+}
+
+// Render the new Spain article page
+exports.getFbiSpainArticle = (req, res, next) => {
+    res.render('pages/fbi-spain-article', {
+        PageTitle: 'FBI Background Check Apostille for Spain',
+        path: '/fbi-spain-article',
+        metaDescription: "Don't let paperwork delay your dream of living in Spain. Get your FBI background check apostilled quickly and accurately with ApostilleDocument.online",
+        metaKeywords: 'FBI apostille Spain, apostille for Spain, Spain visa apostille, FBI background check apostille'
+    });
+}
+
+// Render page for FBI apostille for Portugal
+exports.getFbiPortugal = (req, res, next) => {
+    res.render('pages/fbi-portugal', {
+        PageTitle: 'FBI Apostille for Portugal',
+        path: '/fbi-apostille-for-portugal',
+        metaDescription: 'Get your FBI background check apostilled for Portugal quickly with FBIExpress.com. Expedited processing, transparent pricing & trusted by expats.',
+        metaKeywords: 'FBI apostille Portugal, apostille for Portugal, Portugal visa apostille, D7 apostille'
+    });
 }

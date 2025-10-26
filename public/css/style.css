@@ -134,3 +134,97 @@ footer p{
     margin: 0;
     padding: 10px;
 }
+
+/* blog styles */
+.blog-hero h1{ color: var(--main-color-2); margin-bottom: 0.5rem; }
+.blog-card{ border: none; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,.12); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+.blog-card img{ height: 200px; object-fit: cover; }
+.blog-card .card-body{ padding: 1rem; }
+.blog-card .card-title{ color: var(--main-color); font-weight: 700; }
+.blog-card .card-text{ color: #444; }
+.card-link{ text-decoration: none; color: inherit; }
+.blog-card:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,.18); }
+
+/* Styles for static pages like fbi-spain */
+.container_x.staticPages{
+    max-width: 980px;
+    margin: 48px auto;
+    background: #ffffff;
+    padding: 28px 30px;
+    border-radius: 12px;
+    box-shadow: 0 18px 40px rgba(6,24,51,0.08);
+}
+.page-header h1{
+    color: var(--main-color-2);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 12px;
+}
+.section-intro p{
+    color: #233142;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+}
+.section-intro p.lead{ /* emphasize lead paragraphs */
+    font-size: 1.05rem;
+    color: #2b3948;
+}
+/* Process steps styling */
+.process-steps{ list-style: none; padding-left: 0; margin-left: 0; }
+.process-steps li{ position: relative; padding-left: 64px; margin-bottom: 1rem; color:#2f3b49; }
+.process-steps .step-number{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--main-color);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+.process-steps strong{ color: var(--main-color-2); }
+
+/* Pricing and lists */
+.pricing-section ul{ padding-left: 1rem; }
+.pricing-section li{ margin-bottom: 6px; color:#2b3948; font-weight:600; }
+.pricing-section li strong{ color: var(--main-color); }
+
+.why-choose-us ul{ padding-left: 1rem; }
+.why-choose-us ul li{ margin-bottom: 0.6rem; color:#32414f; }
+
+/* CTA button */
+.cta-button{
+    background: linear-gradient(90deg, var(--main-color-2) 0%, var(--main-color) 100%);
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.7rem 1.2rem;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(48, 63, 86, 0.12);
+    transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+.cta-button:hover{ transform: translateY(-3px); box-shadow: 0 16px 36px rgba(48, 63, 86, 0.18); opacity: 0.98; }
+
+/* Make tables look nicer inside static pages */
+.staticPages .table{ margin-bottom: 1.25rem; }
+.staticPages .table thead th{ background: #f7f9fb; color: var(--main-color-2); font-weight:700; }
+.staticPages .table tbody td{ vertical-align: middle; color:#2b3948; }
+
+/* Responsive tweaks */
+@media (max-width: 767px){
+    .container_x.staticPages{ padding: 18px; margin: 20px 12px; }
+    .page-header h1{ font-size: 1.25rem; }
+    .process-steps li{ padding-left: 56px; }
+    .process-steps .step-number{ width:40px; height:40px; }
+    body{ font-size:15px; }
+    h1{ font-size:1.25rem; }
+}
+
+/* small polish for icons (if using fontawesome/glyphicon substitutes) */
+.primary-color{ color: var(--main-color); }
