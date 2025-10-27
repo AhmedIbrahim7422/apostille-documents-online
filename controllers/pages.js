@@ -109,7 +109,7 @@ exports.getPayment = (req, res, next) => {
     
     Order.findById(invoiceId)
         .then(invoice => {
-            return res.send( invoice);
+            return res.send(invoice);
         })
         .catch(err => console.log(err))
 }
