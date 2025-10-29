@@ -21,7 +21,8 @@
     <meta property="og:url" content="<%= path %>">
     <% } %>
     <meta property="og:type" content="website">
-    <meta property="og:image" content="/docs/img/cover.jpg">
+    <% const metaImg = (typeof metaImage !== 'undefined') ? metaImage : '/docs/img/cover.jpg' %>
+    <meta property="og:image" content="<%= metaImg %>">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +34,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
    <meta name="google-site-verification" content="oBrP0GqvcUKsicXa24HbWIfMbgePVmMCfuOYztFHTPc" />
-
+  <link rel="icon" href="img/icon.ico" type="image/x-icon">
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-16683487822');
