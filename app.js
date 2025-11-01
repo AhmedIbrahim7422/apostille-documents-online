@@ -54,6 +54,11 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use((req, res, next) => {
+  res.locals.canonicalUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+  next();
+});
+
 app.use(pagesRoutes)
 
 
