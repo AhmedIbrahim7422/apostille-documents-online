@@ -67,6 +67,14 @@ exports.getIndex = (req, res, next) => {
 }
 exports.getApostilleOrder = (req, res, next) => {
     console.log("make order page");
+    const ip =  req.headers['x-forwarded-for']?.split(',')[0]?.trim() || // first IP if behind proxy
+    req.socket?.remoteAddress ||                             // fallback
+    null;
+
+  // Normalize IPv6 format like "::ffff:192.168.0.1"
+  const cleanIp = ip?.replace(/^::ffff:/, '');
+
+  console.log('Client IP:', cleanIp);
     res.render('pages/apostille-order', {
         PageTitle: 'Apostille Order',
         path: 'order',
