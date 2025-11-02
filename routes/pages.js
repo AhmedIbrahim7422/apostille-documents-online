@@ -36,6 +36,8 @@ router.get('/fbi-spain', pages.getFbiSpain);
 router.get('/fbi-spain-article', pages.getFbiSpainArticle);
 router.get('/why-choose-apostille-documents-online', pages.getFbiService);
 router.get('/fbi-apostille-for-portugal', pages.getFbiPortugal);
+// Apostille Mexico comprehensive guide
+router.get('/apostille-services-mexico-guide', pages.getApostilleMexicoGuide);
 
 
 module.exports = router

@@ -184,7 +184,7 @@
                                     <div class="mb-3 col-md-4">
                                         <label for="document1" class="form-label">Upload Your document #1 </label>
                                         <input type="file" name="files[]" required id="document1"
-                                            class="files-input form-control">
+                                            class="files-input form-control" accept=".pdf">
                                     </div>
                                     <div class="mb-3 col-md-4">
                                         <label for="documentType1" class="form-label">Document Type</label>
@@ -284,6 +284,7 @@
                     const input = newRow.querySelector('.files-input');
                     input.id = `document${fileCount}`;
                     input.required = false; // Remove the required attribute
+                    input.accept = '.pdf'; // Ensure PDF restriction is set on new inputs
                     const select = newRow.querySelector('.document-name');
                     select.id = `documentType${fileCount}`;
                     select.required = false; // Remove the required attribute

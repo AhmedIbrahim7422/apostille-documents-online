@@ -296,6 +296,7 @@ exports.sendEmail = async (req, res, next) => {
  
 exports.getBlog = (req, res, next) => {
     const posts = [
+        
         {
             url: '/apostille-order',
             img: '/img/howToApostilleADocument.jpg',
@@ -334,7 +335,13 @@ exports.getBlog = (req, res, next) => {
             img: '/img/FbiPortugalApostille.jpg',
             title: 'FBI Apostille for Portugal (D7 & Golden Visa)',
             desc: 'Get your FBI background check apostilled for Portugal quickly. Expedited processing, transparent pricing & trusted by expats.'
-        }
+        },
+        {
+            url: '/apostille-services-mexico-guide',
+            img: '/img/mexicoApostille.jpg',
+            title: 'Apostille Services in Mexico: The Complete 2025 Guide (Federal vs. State)',
+            desc: 'Where to apostille federal vs state documents, costs, and step-by-step guidance to get your documents apostilled in Mexico.'
+        },
     ];
 
     res.render('pages/blog', {
@@ -344,6 +351,17 @@ exports.getBlog = (req, res, next) => {
         metaKeywords: 'apostille blog, FBI apostille guide, document authentication, apostille how-to',
         posts: posts,
         metaImage: '/img/cover.jpg'
+    });
+}
+
+// Render the Apostille in Mexico comprehensive guide
+exports.getApostilleMexicoGuide = (req, res, next) => {
+    res.render('pages/apostille-mexico-guide', {
+        PageTitle: 'Apostille Services in Mexico: The Complete 2025 Guide (Federal vs. State)',
+        path: '/apostille-mexico-guide',
+        metaDescription: 'A complete 2025 guide to apostille services (Apostilla) in Mexico. Learn the difference between federal (SEGOB) and state apostille processes, costs, requirements, and which authority to use.',
+        metaKeywords: 'Apostille, Apostilla, Mexico, SEGOB, Federal, State, Hague Convention, Legalization, Trámite, 2025 Guide, Notary, Public Document, Apostille Mexico, Apostillar documento',
+        metaImage: '/img/howToApostilleADocument.jpg'
     });
 }
 
