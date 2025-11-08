@@ -173,6 +173,10 @@ footer p{
 /* Process steps styling */
 .process-steps{ list-style: none; padding-left: 0; margin-left: 0; }
 .process-steps li{ position: relative; padding-left: 64px; margin-bottom: 1rem; color:#2f3b49; }
+.process-steps li li{
+    list-style: none;
+    padding-left: 0;
+}
 .process-steps .step-number{
     position: absolute;
     left: 0;
@@ -228,3 +232,7 @@ footer p{
 
 /* small polish for icons (if using fontawesome/glyphicon substitutes) */
 .primary-color{ color: var(--main-color); }
+
+.page-header img{
+    max-width: 100%;
+}

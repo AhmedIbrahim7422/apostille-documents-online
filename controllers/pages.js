@@ -296,7 +296,7 @@ exports.sendEmail = async (req, res, next) => {
  
 exports.getBlog = (req, res, next) => {
     const posts = [
-        
+       
         {
             url: '/apostille-order',
             img: '/img/howToApostilleADocument.jpg',
@@ -341,6 +341,12 @@ exports.getBlog = (req, res, next) => {
             img: '/img/mexicoApostille.jpg',
             title: 'Apostille Services in Mexico: The Complete 2025 Guide (Federal vs. State)',
             desc: 'Where to apostille federal vs state documents, costs, and step-by-step guidance to get your documents apostilled in Mexico.'
+        },
+         {
+            url: '/expedited-us-department-of-state-apostille',
+            img: '/img/hero-us-department-of-state.jpg',
+            title: 'Expedited US Department of State Apostille Services',
+            desc: 'Learn about expedited apostille services through the US Department of State.'
         },
     ];
 
@@ -417,5 +423,16 @@ exports.getFbiPortugal = (req, res, next) => {
         metaDescription: 'Get your FBI background check apostilled for Portugal quickly with FBIExpress.com. Expedited processing, transparent pricing & trusted by expats.',
         metaKeywords: 'FBI apostille Portugal, apostille for Portugal, Portugal visa apostille, D7 apostille'
         ,metaImage: '/img/FbiPortugalApostille.jpg'
+    });
+}
+
+// Render page for Expedited US Department of State Apostille
+exports.getExpeditedUsApostille = (req, res, next) => {
+    res.render('pages/expedited-us-department-of-state-apostille', {
+        PageTitle: 'Expedited U.S. Dept. of State Apostille | 8-Day Service',
+        path: '/expedited-us-department-of-state-apostille',
+        metaDescription: 'Get your U.S. Department of State apostille in just 8 business days. We offer a fast, expedited service for federal documents. Order digitally or by mail. Track your order 24/7.',
+        metaKeywords: 'US Department of State apostille, expedited apostille, state department authentication, fast apostille service'
+        ,metaImage: '/img/us-department-of-state.jpg'
     });
 }
