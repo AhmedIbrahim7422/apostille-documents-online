@@ -59,6 +59,7 @@ body{
 
 h2, h3{
     color: var(--main-color-2);
+    font-size: 1.5em;
 }
 .spacial-text{
     color: var(--main-color);

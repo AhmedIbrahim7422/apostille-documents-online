@@ -348,6 +348,12 @@ exports.getBlog = (req, res, next) => {
             title: 'Expedited US Department of State Apostille Services',
             desc: 'Learn about expedited apostille services through the US Department of State.'
         },
+        {
+            url: '/fbi-background-check-apostille',
+            img: '/img/fbi-background-check-apostille.jpg',
+            title: 'FBI Background Check Apostille | 12-Day Expedited Service',
+            desc: 'Fast 12-business-day FBI apostille service — digital uploads or mail-in. Learn how to order.'
+        },
     ];
 
     res.render('pages/blog', {
@@ -401,6 +407,17 @@ exports.getFbiService = (req, res, next) => {
         metaDescription: 'Get your FBI background check apostille fast. ApostilleDocuments.online is an approved channeler for expedited FBI apostille services. Learn our simple process and clear apostille cost.',
         metaKeywords: 'fast FBI apostille, expedited FBI apostille, FBI background check apostille, apostille service'
         ,metaImage: '/img/icon.jpg'
+    });
+}
+
+// Render page for FBI Background Check Apostille (new)
+exports.getFbiBackgroundApostille = (req, res, next) => {
+    res.render('pages/fbi-background-check-apostille', {
+        PageTitle: 'FBI Background Check Apostille | 12-Day Expedited Service',
+        path: '/fbi-background-check-apostille',
+        metaDescription: 'Need an FBI Background Check Apostille? We offer a fast 9-business-day expedited service. We handle the U.S. Dept. of State process. Upload your digital PDF or mail your hard copy.',
+        metaKeywords: 'FBI apostille, background check apostille, expedited FBI apostille',
+        metaImage: '/img/FbiBackgroundApostille.jpg'
     });
 }
 
